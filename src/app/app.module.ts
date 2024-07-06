@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RouterOutlet } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
-import { loginReducer } from './Store/reducers/login.reducer';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { loginReducer, loginFeature } from './Store/reducers/login.reducer';
 import { environment } from '../../environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -14,14 +14,11 @@ import { environment } from '../../environment';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterOutlet,
-    StoreModule.forRoot({login: loginReducer}),
-
+    StoreModule.forRoot({}),
+    StoreModule.forFeature(loginFeature),
   ],
   providers: [
-    provideClientHydration(),
-    provideStoreDevtools({ maxAge: 25, logOnly: environment.production })
-
+    provideStoreDevtools({ maxAge: 25, logOnly: environment.production }),
   ],
   bootstrap: [AppComponent]
 })
