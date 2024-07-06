@@ -4,20 +4,24 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RouterOutlet } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
-import { userLoginReducer } from './User-login-state-store/user-login-reducer';
+import { loginReducer } from './Store/reducers/login.reducer';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { environment } from '../../environment';
 @NgModule({
   declarations: [
     AppComponent,
-    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterOutlet,
-    StoreModule.forRoot({ store: userLoginReducer })
+    StoreModule.forRoot({login: loginReducer}),
+
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    provideStoreDevtools({ maxAge: 25, logOnly: environment.production })
+
   ],
   bootstrap: [AppComponent]
 })

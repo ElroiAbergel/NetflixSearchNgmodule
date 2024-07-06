@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { login, logout } from '../User-login-state-store/user-login-actions';
+import { login } from '../Store/actions/login.actions';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -20,8 +20,9 @@ export class LoginComponent {
       }
       ).then(data => {
         if (data) {
-          alert("Successfully logged in!");
+          console.log('Username before dispatch:', this.username); // Debugging line
           this.store.dispatch(login({ username: this.username }));
+          alert("Successfully logged in!");
           this.router.navigate(['/']);
         } else {
           alert("Failed to log in. Please try again.");
